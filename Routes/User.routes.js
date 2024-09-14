@@ -56,6 +56,25 @@ const UserRoutes = express.Router()
 //   })
 // })
 
+UserRoutes.post('/create-admin', async (req, res) => {
+  try {
+    const newUser = new User({
+      username: 'admin',
+      password: 'admin',
+      role: 'admin'
+    })
+    await newUser.save()
+    res.json({
+      success: true,
+      message: 'admin user created successfully!'
+    })
+  } catch (error) {
+    res.json({
+      success: false
+    })
+  }
+})
+
 UserRoutes.post('/signup', async (req, res) => {
   try {
     const { username, password } = req.body
